@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Table from './Table';
+import RangeSlider from './RangeSlider';
 
 export default class Main extends Component {
   constructor() {
@@ -21,6 +22,7 @@ export default class Main extends Component {
 
     return (
       <div>
+        <RangeSlider upperBound={2019} lowerBound={1926} />
         <Table returns={returns} />
       </div>
     )
