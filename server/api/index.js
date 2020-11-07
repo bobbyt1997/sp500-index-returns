@@ -1,16 +1,20 @@
 const router = require('express').Router();
-const data = require('../../data')
+const data = require('../../data').sort((a, b) => a.year - b.year);
 
 router.get('/', (req, res, next) => {
   const filter = req.query.sliderValue;
+  let cumulativeReturn = 0;
+  let returnData = [...data];
 
-  if (!filter) {
-    res.send(data);
-  } else {
-    res.send(data.filter((obj) => {
-      return obj.year >= filter[0] && obj.year <= filter[1];
-    }))
+  if (filter) {
+    returnData = returnData.filter((obj) => obj.year >= filter[0] && obj.year <= filter[1]);
   }
+
+  res.send(returnData.map((obj) => {
+    cumulativeReturn += parseFloat(obj.totalReturn);
+    let formattedReturn = cumulativeReturn.toFixed(2);
+    return { ...obj, cumulative: formattedReturn };
+  }).sort((a, b) => b.year - a.year));
 });
 
 //handle 404 error
