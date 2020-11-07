@@ -18,7 +18,7 @@ export default function Table(props) {
             <tr key={index}>
               <th scope="row">{indexReturnObj.year}</th>
               <td>{indexReturnObj.totalReturn}</td>
-              <td>CUMULATIVE RETURN</td>
+              <td>{indexReturnObj.cumulative}</td>
             </tr>
           );
         }) : <h1>Loading...</h1>}
