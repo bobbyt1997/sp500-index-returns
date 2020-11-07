@@ -28,6 +28,7 @@ export default class Main extends Component {
   render() {
     return (
       <div>
+        <h1>S&P 500 Index Returns</h1>
         <RangeSlider upperBound={2019} lowerBound={1926} updateTable={this.updateTable} />
         {this.state.returns.length > 0 ? <Table returns={this.state.returns} /> : <h2>Loading...</h2>}
       </div>
