@@ -14,6 +14,13 @@ export default class RangeSlider extends Component {
       upperBound: this.props.upperBound,
       value: [this.props.lowerBound, this.props.upperBound],
     };
+
+    this.onSliderChange = this.onSliderChange.bind(this);
+  }
+
+  onSliderChange(value) {
+    this.setState({ value });
+    this.props.updateTable(value);
   }
 
   render() {
@@ -24,6 +31,7 @@ export default class RangeSlider extends Component {
           defaultValue={[this.state.lowerBound, this.state.upperBound]}
           min={this.state.lowerBound}
           max={this.state.upperBound}
+          onAfterChange={this.onSliderChange}
           railStyle={{
             height: 2
           }}

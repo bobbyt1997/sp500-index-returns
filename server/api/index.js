@@ -2,7 +2,15 @@ const router = require('express').Router();
 const data = require('../../data')
 
 router.get('/', (req, res, next) => {
-  res.send(data);
+  const filter = req.query.sliderValue;
+
+  if (!filter) {
+    res.send(data);
+  } else {
+    res.send(data.filter((obj) => {
+      return obj.year >= filter[0] && obj.year <= filter[1];
+    }))
+  }
 });
 
 //handle 404 error

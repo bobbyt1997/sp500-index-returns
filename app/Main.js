@@ -9,21 +9,27 @@ export default class Main extends Component {
     this.state = {
       returns: []
     };
+
+    this.updateTable = this.updateTable.bind(this);
   }
 
   componentDidMount() {
-    axios.get('/api/').then((response) => {
+    axios.get('/api').then((response) => {
       this.setState({ returns: response.data });
     });
   }
 
-  render() {
-    const returns = this.state.returns ? this.state.returns : null;
+  updateTable(sliderValue) {
+    axios.get('/api', { params: { sliderValue } }).then((response => {
+      this.setState({ returns: response.data });
+    }))
+  }
 
+  render() {
     return (
       <div>
-        <RangeSlider upperBound={2019} lowerBound={1926} />
-        <Table returns={returns} />
+        <RangeSlider upperBound={2019} lowerBound={1926} updateTable={this.updateTable} />
+        {this.state.returns.length > 0 ? <Table returns={this.state.returns} /> : <h2>Loading...</h2>}
       </div>
     )
   }
