@@ -26,6 +26,7 @@ export default class RangeSlider extends Component {
   render() {
     return (
       <div className="slider">
+        <p>Filter Year</p>
         <Range
           allowCross={false}
           defaultValue={[this.state.lowerBound, this.state.upperBound]}
